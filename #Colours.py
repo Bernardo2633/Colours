@@ -122,6 +122,7 @@ def create_calculator_window(calc_id):
     # Handle window closing
     window.protocol("WM_DELETE_WINDOW", lambda w=window: close_calculator(w))
     
+    frame.pack()
     return window
 
 def add_new_calculator():
