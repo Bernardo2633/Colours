@@ -32,7 +32,7 @@ neon_ligth_blue = "#83EEFF"
 
 # Global calculator management
 calculators = {}  # {window: {'id': identifier, 'label': label_widget}}
-calc_counter = 0  # Counter for unique identifiers (a-i)
+calc_counter = 0  # Counter for unique identifiers (a-z cycling)
 max_calculators = 10
 
 def create_calculator_window(calc_id):
@@ -132,11 +132,8 @@ def add_new_calculator():
         tkinter.messagebox.showerror("Max Calculators", f"Max. calculators reached ({max_calculators})")
         return
     
-    if calc_counter == 0:
-        calc_id = 'a'
-    else:
-        calc_id = chr(ord('a') + calc_counter - 1)
-    
+    # Cycle through a-z, then restart from a
+    calc_id = chr(ord('a') + (calc_counter % 26))
     calc_counter += 1
     create_calculator_window(calc_id)
 
