@@ -46,7 +46,7 @@ def create_calculator_window(calc_id):
     # Main frame
     frame = tkinter.Frame(window)
     
-    # Top control row
+    # Top control row (packed)
     control_frame = tkinter.Frame(frame, bg=rich_black, height=60)
     control_frame.pack(fill="x", padx=5, pady=5)
     
@@ -91,8 +91,12 @@ def create_calculator_window(calc_id):
     )
     coming_soon_button.pack(side="left", padx=5, pady=5)
     
+    # Calculator frame (grid-based)
+    calc_frame = tkinter.Frame(frame)
+    calc_frame.pack()
+    
     # Display label
-    label = tkinter.Label(frame, text="0", font=("Arial", 50), bg=rich_black, fg=white, anchor="e", width=column_count)
+    label = tkinter.Label(calc_frame, text="0", font=("Arial", 50), bg=rich_black, fg=white, anchor="e", width=column_count)
     label.grid(row=0, column=0, columnspan=column_count, sticky="ew")
     
     # Calculator buttons
@@ -100,7 +104,7 @@ def create_calculator_window(calc_id):
         for column in range(column_count):
             value = buttons[row][column]
             button = tkinter.Button(
-                frame, 
+                calc_frame, 
                 text=value, 
                 font=("Arial", 25), 
                 width=column_count-1, 
@@ -114,8 +118,6 @@ def create_calculator_window(calc_id):
                 button.config(bg=old_silver, fg=rich_black, activebackground=white)
             elif value not in rigth_buttons and value not in numbers_buttons:
                 button.config(bg=rich_black, fg=white, activebackground=blueberry)
-    
-    frame.pack()
     
     # Handle window closing
     window.protocol("WM_DELETE_WINDOW", lambda w=window: close_calculator(w))
