@@ -1,4 +1,4 @@
-#Colours
+#Secret Calculator
 
 import tkinter
 import tkinter.simpledialog
